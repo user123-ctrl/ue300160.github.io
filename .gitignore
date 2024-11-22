@@ -1,2 +1,3 @@
 rosalind_data/*
 */__pycache__
+rosalind/test.txt
