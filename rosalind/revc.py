@@ -30,18 +30,54 @@ def complement(x):
     else: # if no valid nucleotide was input
         return None
 
-raw = read_input('../rosalind_data/rosalind_revc.txt')  # since the file only contains one line, I just need to keep the first line of the list that read_input returns
-dna = raw[0]
+def complement_sequence(seq):
+    """
+    Complement a DNA sequence
 
-# strategy:
-# 1. reverse the DNA
-# 2. complement the reversed sequence bit by bit
-#   - go over all nucleotides and translate each base to its complement
+    Parameters
+    ----------
+    seq : str
+        A DNA sequence.
 
-reversed = dna[::-1]
-rev_complement = ''
+    Returns
+    -------
+    str
+        The complement of the input sequence.
+    """
+    complemented = ''
+    for base in seq:
+        complemented += complement(base)
+    return complemented
 
-for base in reversed:
-    rev_complement += complement(base)
+def reverse_complement(seq):
+    """
+    Reverse complement a DNA sequence
 
-print(rev_complement)
+    Parameters
+    ----------
+    seq : str
+        A DNA sequence.
+
+    Returns
+    -------
+    str
+        The reverse complement of the input sequence.
+    """
+    return complement_sequence(seq[::-1])
+
+
+def main():
+    raw = read_input('../rosalind_data/rosalind_revc.txt')  # since the file only contains one line, I just need to keep the first line of the list that read_input returns
+    dna = raw[0]
+
+    # strategy:
+    # 1. reverse the DNA
+    # 2. complement the reversed sequence bit by bit
+    #   - go over all nucleotides and translate each base to its complement
+
+    rev_complement = reverse_complement(dna)
+
+    print(rev_complement)
+
+if "__name__" == "__main__":
+    main()
