@@ -69,12 +69,7 @@ def mirror(text):
 
 def find_diagonal_dl(word, text):
     mirrored = mirror(text)
-    dr_starts = dr_diag_starts(len(mirrored))
-    dr_diagonals = []
-    for start in dr_starts:
-        diagonal = dr_diag(mirrored, start)
-        dr_diagonals.append(diagonal)
-    occ = find_horizontal(word, dr_diagonals)
+    occ = find_diagonal_dr(word, mirrored)
     return occ
 
 # testing region:
