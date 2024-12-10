@@ -72,6 +72,16 @@ def find_diagonal_dl(word, text):
     occ = find_diagonal_dr(word, mirrored)
     return occ
 
+def check_spot(text, i, j):
+    upper_diagonal = text[i-1][j-1] + text[i][j] + text[i+1][j+1]
+    lower_diagonal = text[i-1][j+1] + text[i][j] + text[i+1][j-1]
+    upper = (upper_diagonal == 'MAS' or upper_diagonal == 'SAM')
+    lower = (lower_diagonal == 'MAS' or lower_diagonal == 'SAM')
+    if upper and lower:
+        return True
+    else:
+        return False
+
 # testing region:
 # test = dr_diag_starts(4)
 # for d in test:
@@ -80,24 +90,29 @@ def find_diagonal_dl(word, text):
 # test = dr_diag(data, [6, 6])
 # print(test)
 
-
-
 # action!
 data = read_input('../aoc_data/day04.txt')
 
-hor_forw = find_horizontal('XMAS', data)
-hor_back = find_horizontal('SAMX', data)
-# vertical
-ver_forw = find_vertical('XMAS', data)
-ver_back = find_vertical('SAMX', data)
-# diagonal
-# downward, right:
-dr_forw = find_diagonal_dr('XMAS', data)
-dr_back = find_diagonal_dr('SAMX', data)
-# downward, left
-dl_forw = find_diagonal_dl('XMAS', data)
-dl_back = find_diagonal_dl('SAMX', data)
+# hor_forw = find_horizontal('XMAS', data)
+# hor_back = find_horizontal('SAMX', data)
+# # vertical
+# ver_forw = find_vertical('XMAS', data)
+# ver_back = find_vertical('SAMX', data)
+# # diagonal
+# # downward, right:
+# dr_forw = find_diagonal_dr('XMAS', data)
+# dr_back = find_diagonal_dr('SAMX', data)
+# # downward, left
+# dl_forw = find_diagonal_dl('XMAS', data)
+# dl_back = find_diagonal_dl('SAMX', data)
 
-total = hor_forw + hor_back + ver_forw + ver_back + dr_forw + dr_back + dl_forw + dl_back
-print(total)
+# total = hor_forw + hor_back + ver_forw + ver_back + dr_forw + dr_back + dl_forw + dl_back
+# print(total)
 
+counter = 0
+n = len(data)
+for i in range(1, n-1):
+    for j in range(1, n-1):
+        if check_spot(data, i, j):
+            counter += 1
+print(counter)
