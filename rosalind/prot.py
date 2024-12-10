@@ -27,17 +27,36 @@ code = {
     "UGG": "W",      "CGG": "R",      "AGG": "R",      "GGG": "G"
 }
 
-line_list = read_input("../rosalind_data/rosalind_prot.txt")
-rna = line_list[0]
+def translate(rna):
+    """
+    Translate an RNA sequence into protein
 
-# read the rna in triplets:
-peptide = ""
-for start in range(0, len(rna), 3):
-    codon = rna[start:start+3]
-    aminoacid = code[codon]
-    if aminoacid == "Stop":
-        break
-    peptide += aminoacid
-    # print(codon, "corresponds to", aminoacid)
+    Parameters
+    ----------
+    rna : str
+        An RNA sequence.
 
-print(peptide)
+    Returns
+    -------
+    str
+        The protein sequence corresponding to the input RNA sequence.
+    """
+    peptide = ""
+    for start in range(0, len(rna), 3):
+        codon = rna[start:start+3]
+        aminoacid = code[codon]
+        if aminoacid == "Stop":
+            break
+        peptide += aminoacid
+    return peptide
+
+def main():
+    line_list = read_input("../rosalind_data/rosalind_prot.txt")
+    rna = line_list[0]
+
+    peptide = translate(rna)
+    print(peptide)
+
+
+if __name__ == "__main__":
+    main()
