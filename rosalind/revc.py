@@ -79,5 +79,5 @@ def main():
 
     print(rev_complement)
 
-if "__name__" == "__main__":
+if __name__ == "__main__":
     main()
